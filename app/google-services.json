@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "481596249600",
+    "project_id": "spkdesa-d5811",
+    "storage_bucket": "spkdesa-d5811.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481596249600:android:bec78798736ff996922ae5",
+        "android_client_info": {
+          "package_name": "com.example.spkdesa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "481596249600-fho9gsq4k45n91brm1d41fuchjjkmltr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmeL_p7aFK_AXzrk9XHI52XSAzgCDYuFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "481596249600-fho9gsq4k45n91brm1d41fuchjjkmltr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
