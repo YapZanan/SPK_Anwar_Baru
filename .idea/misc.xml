@@ -22,7 +22,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/activity_desa.xml" value="0.26979166666666665" />
         <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/activity_main.xml" value="0.1703125" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/activity_rt.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/activity_splash.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/change_pass_rt.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/delete_alert_warga.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/detail_rt.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/detail_warga.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/fragment_daftar_rt.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/fragment_penerima.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/fragment_profile.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/fragment_profile_rt.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/fragment_tambah_rt.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/fragment_tambah_warga.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/fragment_warga.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/list_rt.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/listwarga.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/listwargadesa.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/update_data_rt.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/layout/update_data_warga.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/menu/bottom_nav_desa.xml" value="0.26979166666666665" />
+        <entry key="..\:/spk-firebase-anwar/app/src/main/res/menu/bottom_nav_rt.xml" value="0.26979166666666665" />
       </map>
     </option>
   </component>

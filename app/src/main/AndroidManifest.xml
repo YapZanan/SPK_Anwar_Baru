@@ -12,10 +12,11 @@
         <activity android:name=".mainActivity"/>
         <activity android:name=".rtActivity" />
         <activity android:name=".desaActivity" />
-        <activity android:name=".activity_splash">
+<!--        <activity android:name=".Fuzzy" />-->
+        <activity android:name=".activity_splash"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

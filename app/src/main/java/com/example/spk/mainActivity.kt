@@ -57,11 +57,30 @@ class mainActivity : AppCompatActivity() {
             }else if(pass.isEmpty()){
                 password.error = "Harap isi password"
                 password.requestFocus()
-            }else{
+            }else {
                 val database = FirebaseDatabase.getInstance().getReference("/users")
                 loginUser_(database, usern, pass,
                     onSuccess = {
-                        Toast.makeText(applicationContext,"Berhasil Masuk", Toast.LENGTH_LONG).show()
+                        database.child(usern).addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                val jabatan = snapshot.child("jabatan").value.toString()
+                                Toast.makeText(applicationContext, "Jabatan: $jabatan", Toast.LENGTH_LONG).show()
+
+//                                di sini udah bisa ganti sesuai jabatan, tinggal modif aja
+                                val intent = if (jabatan == "rt") {
+                                    Intent(this@mainActivity, rtActivity::class.java)
+                                } else {
+                                    Intent(this@mainActivity, desaActivity::class.java)
+                                }
+                                startActivity(intent)
+                            }
+
+                            override fun onCancelled(p0: DatabaseError) {
+                                val errorMessage = "Tidak Bisa Masuk"
+                                password.error = errorMessage
+                                password.requestFocus()
+                            }
+                        })
                     },
                     onError = { errorMessage ->
                         // Do something if there is an error during login
@@ -69,7 +88,6 @@ class mainActivity : AppCompatActivity() {
                         password.requestFocus()
                     }
                 )
-
             }
         }
 
@@ -89,26 +107,6 @@ class mainActivity : AppCompatActivity() {
             }
             override fun onCancelled(error: DatabaseError) {
                 onError("Error reading data: ${error.message}")
-            }
-        })
-    }
-
-
-
-    fun logAllData(database: DatabaseReference) {
-        database.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (data in snapshot.children) {
-                        Log.d("FirebaseData", "Key: ${data.key}, Value: ${data.value}")
-                    }
-                } else {
-                    Log.d("FirebaseData", "No data found")
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("FirebaseData", "Error reading data: ${error.message}")
             }
         })
     }

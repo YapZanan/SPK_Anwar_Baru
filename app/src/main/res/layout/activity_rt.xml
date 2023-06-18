@@ -12,12 +12,11 @@
         android:background="@drawable/atas"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/btm_nav_rt"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:menu="@menu/bottom_nav_rt"
         android:layout_alignParentBottom="true"
-        android:id="@+id/btm_nav_rt"
         android:background="#eee"
-        />
+        app:menu="@menu/bottom_nav_rt" />
 
 </RelativeLayout>
