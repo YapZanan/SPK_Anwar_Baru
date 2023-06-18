@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -13,10 +14,8 @@ import androidx.appcompat.app.AlertDialog
 import com.example.spk.Model.desaModel
 import com.example.spk.Model.rtModel
 import com.example.spk.Model.userModel
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.database.*
 
 class mainActivity : AppCompatActivity() {
 
@@ -25,6 +24,7 @@ class mainActivity : AppCompatActivity() {
     lateinit var password : EditText
     lateinit var SP:SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
+        FirebaseApp.initializeApp(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         login = findViewById(R.id.tbl_login)
@@ -44,23 +44,73 @@ class mainActivity : AppCompatActivity() {
 
 
         login.setOnClickListener {
+
+
             val usern = username.text.toString()
             val pass = password.text.toString()
 
-            if(usern.isNullOrEmpty()){
+
+
+            if(usern.isEmpty()){
                 username.error = "Harap isi username"
                 username.requestFocus()
-            }else if(pass.isNullOrEmpty()){
+            }else if(pass.isEmpty()){
                 password.error = "Harap isi password"
                 password.requestFocus()
             }else{
-                loginUser(usern,pass)
-            }
+                val database = FirebaseDatabase.getInstance().getReference("/users")
+                loginUser_(database, usern, pass,
+                    onSuccess = {
+                        Toast.makeText(applicationContext,"Berhasil Masuk", Toast.LENGTH_LONG).show()
+                    },
+                    onError = { errorMessage ->
+                        // Do something if there is an error during login
+                        password.error = errorMessage
+                        password.requestFocus()
+                    }
+                )
 
+            }
         }
 
 
 
+    }
+
+    //    ini fungsi buat cek apakah data ada di  db, cek nanti dbnya tinggal diubah saja sesuai kebutuhan
+    fun loginUser_(database: DatabaseReference, usern: String, pass: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
+        database.child(usern).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists() && snapshot.child("password").value == pass) {
+                    onSuccess()
+                } else {
+                    onError("Username or password is incorrect")
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                onError("Error reading data: ${error.message}")
+            }
+        })
+    }
+
+
+
+    fun logAllData(database: DatabaseReference) {
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (data in snapshot.children) {
+                        Log.d("FirebaseData", "Key: ${data.key}, Value: ${data.value}")
+                    }
+                } else {
+                    Log.d("FirebaseData", "No data found")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("FirebaseData", "Error reading data: ${error.message}")
+            }
+        })
     }
 
     override fun onBackPressed() {
@@ -81,14 +131,13 @@ class mainActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().reference.child("User").orderByChild("username").equalTo(username)
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
-
             }
 
             override fun onDataChange(p0: DataSnapshot) {
                 if(p0.exists()){
                     for (u in p0.children){
                         val user = u.getValue(userModel::class.java)
-                        if(user!!.pass.equals(pass)){
+                        if(user!!.pass == pass){
                             val editor = SP.edit()
                             editor.putString("USERNAME",user.username)
                             editor.putString("STATUS", user.status)
